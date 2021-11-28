@@ -54,7 +54,7 @@ public class DeviceManager implements Runnable{
             @Override
             public void onFoundEchoObject(EchoObject eoj) {
                 super.onFoundEchoObject(eoj);
-//                System.out.println("Found echo object: "+eoj);
+                System.out.println("Found echo object: "+eoj);
                 try {
                     devicesList.turnOn(eoj.getNode().getAddress());
                     if(!stateDevicesBeforeTurnOffAll.get(eoj.getNode())){
@@ -83,7 +83,7 @@ public class DeviceManager implements Runnable{
                 ArrayList<EchoNode> nodesOffline;
                 //--------------------------------------
                 devicesList.turnOffAll();
-//                System.out.println("Packet = "+NodeProfile.informG().reqInformInstanceListNotification().send().toString());
+                System.out.println("Packet = "+NodeProfile.informG().reqInformInstanceListNotification().send().toString());
                 NodeProfile.informG().reqInformInstanceListNotification().send();
                 Thread.sleep(timeToWaitUpdateDevices);
                 //--------------------------------------
@@ -107,7 +107,7 @@ public class DeviceManager implements Runnable{
                 mqttConnector.disconnect();
 
                 stateDevicesBeforeTurnOffAll = devicesList.getDevices();
-//                System.out.println(devicesList.toString());
+                System.out.println(devicesList.toString());
                 Thread.sleep(timeToReUpdateDevices);
             } catch (IOException e) {
                 e.printStackTrace();

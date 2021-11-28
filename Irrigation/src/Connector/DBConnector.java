@@ -15,7 +15,8 @@ public class DBConnector{
         JDBC_DRIVER="com.mysql.cj.jdbc.Driver";
         DB_URL="jdbc:mysql://localhost:3306/irrigation_database";
         USER="root";
-        PASS="iotlab2018";
+//        PASS="iotlab2018";
+        PASS="123456a@";
         try {
             Class.forName(JDBC_DRIVER);
             connection =  DriverManager.getConnection(DB_URL,USER,PASS);
