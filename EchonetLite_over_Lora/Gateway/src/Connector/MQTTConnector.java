@@ -27,7 +27,7 @@ public class MQTTConnector {
     }
     public MQTTConnector(){
         mqttConnectOptions = new MqttConnectOptions();
-        this.host = "iotagriculture.ddns.net";
+//        this.host = "iotagriculture.ddns.net";
         mqttConnectOptions.setUserName("root");
         mqttConnectOptions.setPassword("root".toCharArray());
         mqttConnectOptions.setAutomaticReconnect(true);
@@ -35,7 +35,7 @@ public class MQTTConnector {
     }
     public MQTTConnector(String topicSetWill, Integer farmId){
         mqttConnectOptions = new MqttConnectOptions();
-        this.host = "iotagriculture.ddns.net";
+//        this.host = "iotagriculture.ddns.net";
         mqttConnectOptions.setUserName("root");
         mqttConnectOptions.setPassword("root".toCharArray());
         mqttConnectOptions.setAutomaticReconnect(true);
