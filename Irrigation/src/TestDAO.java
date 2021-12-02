@@ -25,7 +25,12 @@ public class TestDAO {
 //        testDeviceTypeDao();
 //        testDeviceDao();
 //        testSensingDao();
-        testWeatherForecastDao();
+//        testWeatherForecastDao();
+        testAgriculturePlantDAO();
+    }
+    public static void testAgriculturePlantDAO() {
+        AgriculturePlantDAO agriculturePlantDAO = new AgriculturePlantDAO();
+        agriculturePlantDAO.getAgriculturePlantValid();
     }
 
     public static void testWeatherForecastDao(){
