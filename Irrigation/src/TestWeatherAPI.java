@@ -18,6 +18,7 @@ public class TestWeatherAPI {
         Date datetime = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dt = ft.format(datetime);
+//        String api_key = "LNrGryrjcdTBVNpPvJLCPWdg0lcZCQ4D";
         String api_key = "LNrGryrjcdTBVNpPvJLCPWdg0lcZCQ4D";
         String id_city = "353412"; // Ha noi dua vao location api on https://developer.accuweather.com/accuweather-locations-api/apis
         String api_url = "http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/" + id_city +"?apikey=" + api_key + "&language=en-us&details=true&metric=true";

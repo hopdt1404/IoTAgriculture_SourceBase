@@ -1,6 +1,7 @@
 import DAO.*;
 import Utilities.Helper;
 import com.google.gson.stream.JsonReader;
+import components.controller.LoopController;
 import model.*;
 
 import java.io.*;
@@ -26,7 +27,11 @@ public class TestDAO {
 //        testDeviceDao();
 //        testSensingDao();
 //        testWeatherForecastDao();
-        testAgriculturePlantDAO();
+//        testAgriculturePlantDAO();
+        getWaterForPlant();
+        testAgriculturePlantSetting();
+
+//        testLocateDaoUsing();
     }
     public static void testAgriculturePlantDAO() {
         AgriculturePlantDAO agriculturePlantDAO = new AgriculturePlantDAO();
@@ -112,6 +117,10 @@ public class TestDAO {
         LocateDao locateDao = new LocateDao();
         locateDao.save(new Locate("1","Ha Noi"));
     }
+    public static void testLocateDaoUsing() {
+        LocateDao locateDao = new LocateDao();
+        locateDao.getAllLocateActivate();
+    }
     public static void testUserDao(){
         UserDao userDao = new UserDao();
         userDao.save(new User("admin",Helper.md5("12345678")));
@@ -173,6 +182,21 @@ public class TestDAO {
         for(Sensing s:sensings){
             System.out.println(s.toString());
         }
+    }
+
+    public static void testAgriculturePlantSetting() {
+        long deviceId =  90194313217L;
+        AgriculturePlantDAO agriculturePlantDAO = new AgriculturePlantDAO();
+        AgriculturePlant agriculturePlantResult = agriculturePlantDAO.getAgriculturePlantSettingByDeviceId(deviceId);
+        Float soilMoistureSetting = agriculturePlantResult.getMoisture();
+        System.out.println("soilMoistureSetting: " + soilMoistureSetting);
+
+    }
+
+    public static void getWaterForPlant() {
+        LoopController loopController = new LoopController(424);
+        Float result =  loopController.getResultWater(1.5F);
+        System.out.println("Result water: " + result);
     }
 
 }

@@ -1,13 +1,11 @@
 package components.autoController;
 
 import Connector.MQTTConnector;
-import DAO.DeviceDao;
-import DAO.FarmDao;
-import DAO.PlotDao;
-import DAO.SensingDao;
+import DAO.*;
 import Utilities.Helper;
 import components.OnControlListener;
 import components.controller.Controller;
+import model.AgriculturePlant;
 import model.Sensing;
 import model.WeatherForecast;
 import org.json.simple.JSONObject;
@@ -18,6 +16,7 @@ public class DeviceControlUnit extends Controller implements Comparable<DeviceCo
     private String locateId;
     private Float upperThreshold;
     private Float lowerThreshold;
+    private Float rangeThreshold = 3F;
     private Integer currentSoilMoisture;
     private WeatherForecast weatherForecast;
     private LocalTime latestIrrigationTime;
@@ -64,6 +63,14 @@ public class DeviceControlUnit extends Controller implements Comparable<DeviceCo
         pumpSpeed=3.66F; //ml/s
         upperThreshold=70F;
         lowerThreshold=60F;
+        // get SoilMoisture setting
+        AgriculturePlantDAO agriculturePlantDAO = new AgriculturePlantDAO();
+        AgriculturePlant agriculturePlantResult = agriculturePlantDAO.getAgriculturePlantSettingByDeviceId(deviceId);
+        Float soilMoistureSetting = agriculturePlantResult.getMoisture();
+        System.out.println("soilMoistureSetting: " + soilMoistureSetting);
+        upperThreshold= soilMoistureSetting + rangeThreshold;
+        lowerThreshold= soilMoistureSetting - rangeThreshold;
+
         isAuto=true;
         isOn=true;
         SensingDao sensingDao = new SensingDao();
@@ -71,7 +78,7 @@ public class DeviceControlUnit extends Controller implements Comparable<DeviceCo
         Sensing sensing = sensingDao.getNewestSensingByPlotId(deviceDao.getPlotIdById(getDeviceId()));
         currentSoilMoisture=sensing.getSoilMoisture().intValue();
         System.out.println("DeviceControlUnit line 39");
-        System.out.println("SoilMoisture: "+currentSoilMoisture);
+        System.out.println("CurrentSoilMoisture: "+currentSoilMoisture);
         DeviceControlUnit currentDCU=this;
         final String topic = "/iot_agriculture/controlling/"+ Helper.convertDeviceIdToFarmId(currentDCU.getDeviceId());
         currentDCU.setOnControlListener(new OnControlListener() {

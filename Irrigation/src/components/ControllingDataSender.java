@@ -35,8 +35,13 @@ public class ControllingDataSender {
             @Override
             public void onReceivedControllingData(Float amountOfWater) {
                 JSONObject jsonObject = new JSONObject();
+                System.out.println("onReceivedControllingData with amountOfWater");
+                System.out.println("amountOfWater: " + amountOfWater);
+                System.out.println("timeToWater: " + amountOfWater/1F);
+                System.out.println("deviceId: " + controller.getDeviceId());
                 jsonObject.put("timeToWater",amountOfWater/1F);
                 jsonObject.put("deviceId",controller.getDeviceId());
+                // Todo: Add info to table Controlling
                 mqttConnector.publishMessage(jsonObject.toJSONString(),topic);
             }
         });

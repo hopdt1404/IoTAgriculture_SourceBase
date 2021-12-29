@@ -114,7 +114,7 @@ public class WeatherForecastDao implements Dao<WeatherForecast> {
         int weatherForecastId=0;
         try {
             Timestamp currentTime = Timestamp.valueOf(weatherForecast.getCurTime().atDate(LocalDate.now()));
-            System.out.println("WeatherForecastDao 116");
+//            System.out.println("WeatherForecastDao 116");
             System.out.println(currentTime);
 //            currentTime = Timestamp.valueOf(LocalDateTime.now());
             String sql = "insert into WeatherForecasts (LocateID, CurrentTime) values " +

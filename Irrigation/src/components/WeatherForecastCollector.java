@@ -14,11 +14,12 @@ public class WeatherForecastCollector implements Runnable {
     @Override
     public void run() {
         while(true) {
-            System.out.println("WeatherForecastCollector 19");
+            System.out.println("WeatherForecastCollector");
             System.out.println("weather forecast is updating...");
             WeatherForecastDao weatherForecastDao = new WeatherForecastDao();
             LocateDao locateDao = new LocateDao();
-            ArrayList<Locate> locates = (ArrayList<Locate>) locateDao.getAll();
+//            ArrayList<Locate> locates = (ArrayList<Locate>) locateDao.getAll();
+            ArrayList<Locate> locates = (ArrayList<Locate>) locateDao.getAllLocateActivate();
             for(Locate l:locates){
                 WeatherForecast weatherForecast = new WeatherForecast(l.getLocateId());
                 weatherForecast.update();

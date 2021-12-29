@@ -1,11 +1,10 @@
 package DAO;
 
+import model.AgriculturePlant;
 import model.FarmType;
 import model.Locate;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +29,42 @@ public class LocateDao implements Dao<Locate> {
             if(statement!=null){
                 try {
                     statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return locates;
+    }
+
+    public List<Locate> getAllLocateActivate()
+    {
+        List<Locate> locates = new ArrayList<Locate>();
+        Connection connection = null;
+        try {
+            connection = dbConnector.getConnection();
+            String query = "Select Locates.LocateID, Locates.LocateName from Locates " +
+                    "inner join Farms on Farms.LocateID = Locates.LocateID " +
+                    "inner join Plots on Farms.FarmID = Plots.FarmID " +
+                    "where Farms.Status = 1 and Plots.status = 1" ;
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+//            resultSet.last();    // moves cursor to the last row
+//            System.out.println("Result set size: " +  resultSet.getRow());
+            while (resultSet.next()){
+
+                Locate locate = new Locate(resultSet.getString("LocateID"),
+                        resultSet.getString("LocateName")
+                );
+                locates.add(locate);
+//                System.out.println(locate.toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if(connection!=null){
+                try {
+                    connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

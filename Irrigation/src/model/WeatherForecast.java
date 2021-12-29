@@ -147,7 +147,8 @@ public class WeatherForecast{
 
     }
     private String getApiURL(String locateId){
-        String api_key="LNrGryrjcdTBVNpPvJLCPWdg0lcZCQ4D";
+//        String api_key="LNrGryrjcdTBVNpPvJLCPWdg0lcZCQ4D";
+        String api_key="3DmZBJh3Vkm4n178sfIcY04z0aHugD28";
         String api_url = "http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/" + locateId +"?apikey=" + api_key + "&language=en-us&details=true&metric=true";
         return api_url;
     }
@@ -174,7 +175,7 @@ public class WeatherForecast{
                     in.close();
                     analyse(response.toString());
                 }
-                //Thread.sleep(60*60*1000);
+//                Thread.sleep(60*60*1000);
             } catch (Exception e) {
                 System.out.println(e);
             }

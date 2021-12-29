@@ -30,4 +30,8 @@ public class Locate {
         this.locate = locate;
 
     }
+
+    public String toString() {
+        return "LocateID: " + this.locateId + "LocateName: " + this.locate;
+    }
 }

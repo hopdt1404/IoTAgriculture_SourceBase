@@ -1,6 +1,7 @@
 package DAO;
 
 import model.AgriculturePlant;
+import model.Farm;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,6 +64,45 @@ public class AgriculturePlantDAO implements Dao<AgriculturePlant> {
             }
         }
         return agriculturePlants;
+    }
+    public AgriculturePlant getAgriculturePlantSettingByDeviceId(Long deviceId)
+    {
+        AgriculturePlant agriculturePlant = null;
+        Connection connection = null;
+        try {
+            connection = dbConnector.getConnection();
+            String query = "select agriculture_plants.* " +
+                    " from Devices INNER JOIN Farms ON Devices.FarmID = Farms.FarmID " +
+                    " INNER JOIN Plots ON Plots.PlotID = Devices.PlotID " +
+                    " INNER JOIN farm_plants ON Plots.plant_id = farm_plants.plant_id " +
+                    " INNER JOIN agriculture_plants ON (farm_plants.current_plant_state = agriculture_plants.plant_state_id AND farm_plants.plant_id = agriculture_plants.plant_id ) " +
+                    " where Farms.Status = 1 and Plots.status = 1 and farm_plants.status = 1 and Devices.DeviceID =" + deviceId;
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                agriculturePlant = new AgriculturePlant(resultSet.getLong("id"),
+                        resultSet.getLong("plant_id"),
+                        resultSet.getInt("plant_state_id"),
+                        resultSet.getLong("PlotID"),
+                        resultSet.getInt("growth_period"),
+                        resultSet.getFloat("temperature"),
+                        resultSet.getFloat("moisture")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            if(connection!=null){
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return agriculturePlant;
+
     }
 
     public int save (AgriculturePlant agriculturePlant) {

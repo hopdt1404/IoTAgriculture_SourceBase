@@ -48,17 +48,17 @@ public class MainClass {
             @Override
             public void run() {
                 ControllingDataSender controllingDataSender = new ControllingDataSender();
-//                MPC mpc = new MPC();
-//                mpc.process();
+                MPC mpc = new MPC();
+                mpc.process();
             }
         });
 
-//        WeatherForecastCollector weatherForecastCollector = new WeatherForecastCollector();
-//        Thread weatherForecastCollectorThread = new Thread(weatherForecastCollector);
+        WeatherForecastCollector weatherForecastCollector = new WeatherForecastCollector();
+        Thread weatherForecastCollectorThread = new Thread(weatherForecastCollector);
 
         dataCollectorThread.start();
         controlThread.start();
-//        weatherForecastCollectorThread.start();
+        weatherForecastCollectorThread.start();
 
 //        DataCollector dataCollector = new DataCollector();
 //        dataCollector.run();

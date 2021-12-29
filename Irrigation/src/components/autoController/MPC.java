@@ -12,7 +12,7 @@ public class MPC {
     public MPC(){
         optimizer = new Optimizer();
         dcum = DeviceControlUnitManager.getInstance();
-        System.out.println("DCUM: "+dcum);
+//        System.out.println("DCUM: "+dcum);
     }
     /**
      * hàm này sẽ thực hiện những xử lý sau:
