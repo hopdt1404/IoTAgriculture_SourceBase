@@ -12,7 +12,7 @@ public class MPC {
     public MPC(){
         optimizer = new Optimizer();
         dcum = DeviceControlUnitManager.getInstance();
-//        System.out.println("DCUM: "+dcum);
+
     }
     /**
      * hàm này sẽ thực hiện những xử lý sau:
@@ -39,19 +39,15 @@ public class MPC {
 //                    System.out.println(now.withNano(0).withSecond(0).compareTo(dcum.peek().getLatestIrrigationTime().plusHours(1).withNano(0).withSecond(0)));
 //                }
                 if(now.withNano(0).withSecond(0).compareTo(dcum.peek().getLatestIrrigationTime().plusHours(1).withNano(0).withSecond(0))==0){
-                    System.out.println("NOW: "+now+" DCU TIME: "+dcum.peek().getLatestIrrigationTime());
                     ArrayList<DeviceControlUnit> dcus = new ArrayList<DeviceControlUnit>();
                     // tranh TH xu ly lau hon 1 phut
                     while((!dcum.isEmpty())&&(now.withNano(0).withSecond(0).compareTo(dcum.peek().getLatestIrrigationTime().plusHours(1).withNano(0).withSecond(0))==0)){
-                        System.out.println("REMOVE...");
                         dcus.add(dcum.remove());
                     }
                     System.out.println(dcus.size());
-                    System.out.println("\n------\nDeviceControlUnits will process:\n" +dcus+"\n------\n");
                     //System.out.println("exist loop...");
                     for(DeviceControlUnit dcu: dcus){
                         if(dcu.needProcess()) {
-                            System.out.println("OPTIMIZE");
                             System.out.println(dcu);
                             optimizer.process(dcu);
                             dcum.add(dcu);

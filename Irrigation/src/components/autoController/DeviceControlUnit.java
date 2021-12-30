@@ -203,7 +203,7 @@ public class DeviceControlUnit extends Controller implements Comparable<DeviceCo
                 "\nupperThreshold: "+upperThreshold+
                 "\nlowerThreshold: "+lowerThreshold+
                 "\ncurrentSoilMoisture: "+currentSoilMoisture+
-                "\nlatestIrrigationTime: "+latestIrrigationTime+
+//                "\nlatestIrrigationTime: "+latestIrrigationTime+
                 "\npumpSpeed: "+pumpSpeed+
                 "\nisAuto: "+isAuto+
                 "\nisOn: "+isOn+

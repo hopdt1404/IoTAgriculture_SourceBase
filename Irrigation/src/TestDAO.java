@@ -28,8 +28,7 @@ public class TestDAO {
 //        testSensingDao();
 //        testWeatherForecastDao();
 //        testAgriculturePlantDAO();
-        getWaterForPlant();
-        testAgriculturePlantSetting();
+//        testAgriculturePlantSetting();
 
 //        testLocateDaoUsing();
     }
